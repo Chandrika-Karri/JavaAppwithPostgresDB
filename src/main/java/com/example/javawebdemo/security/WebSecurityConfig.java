@@ -22,29 +22,18 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(request -> request
-                .requestMatchers("/","/css/**","/js/**","/images/**", "/api/v1/auth/**", "/login/**", "oauth_login*", "/oauth2/authorization/**")
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/css/**","/login/oauth2/code/**","/js/**","/images/**", "/api/v1/auth/**", "/login/**", "oauth_login*", "/oauth2/**")
                 .permitAll()
-                .anyRequest().authenticated());
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .anyRequest().authenticated()
+                )
+          .csrf(csrf -> csrf.disable())
+
 
                 .oauth2Login(oauth2 -> {
                             oauth2.userInfoEndpoint(userInfo -> userInfo.userService(customOauth2UserService));
                         }
                 );
-        http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
-
-        http.logout(logout -> logout
-                .logoutUrl("/logout")                            // default logout URL
-                .logoutSuccessUrl("/")                           // redirect here after logout
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
-        );
-
-        http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
-
 
         return http.build();
     }
