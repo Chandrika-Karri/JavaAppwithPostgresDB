@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>FizzBuzz App</title>
 </head>
 <body>
-<h1>Hej och välkommen</h1>
-    <h2 th:text="${user}"></h2>
 
-<div th:each="onePlayer: ${players}">
-    <h2 th:text="${onePlayer.getName()}"></h2>
-    <p th:text="${onePlayer.getAge()}"></p>
+<h1>FizzBuzz App</h1>
 
+<!-- Show form and email if authenticated -->
+<div th:if="${isAuthenticated}">
+    <p>Welcome, <span th:text="${email}">user@example.com</span>!</p>
 
+    <form method="post" action="/">
+        <label for="numberInput">Enter a number:</label>
+        <input id="numberInput"   type="number" name="number" required />
+        <button type="submit">Submit</button>
+    </form>
+
+    <div th:if="${fizzBuzz}">
+        <p>Result for <span th:text="${number}"></span> is: <strong th:text="${fizzBuzz}"></strong></p>
+    </div>
+
+    <a href="/logout">Logout</a>
 </div>
 
 </body>
