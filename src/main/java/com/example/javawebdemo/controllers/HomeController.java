@@ -1,5 +1,7 @@
 package com.example.javawebdemo.controllers;
 
+import com.example.javawebdemo.model.FizzBuzzResult;
+import com.example.javawebdemo.repository.FizzBuzzResultRepository;
 import com.example.javawebdemo.service.FizzBuzzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -16,6 +18,10 @@ public class HomeController extends BaseController {
 
     @Autowired
     private FizzBuzzService fizzBuzzService;
+
+    @Autowired
+    private FizzBuzzResultRepository fizzBuzzResultRepository;
+
     @GetMapping("/")
     public String home(Model model, Authentication authentication) {
         boolean isAuthenticated = authentication != null && authentication.isAuthenticated() &&
@@ -30,8 +36,12 @@ public class HomeController extends BaseController {
         return "home";
     }
     @PostMapping("/")
-    String homePost(@RequestParam int number, Model model,Authentication authentication) {
+    public String handlePost(@RequestParam int number, Model model, Authentication authentication) {
         String fizzBuzz = fizzBuzzService.fizzBuzz(number);
+
+        // Save the result to the database
+        fizzBuzzResultRepository.save(new FizzBuzzResult(number, fizzBuzz));
+
         model.addAttribute("number", number);
         model.addAttribute("fizzBuzz", fizzBuzz);
 
@@ -45,8 +55,8 @@ public class HomeController extends BaseController {
             model.addAttribute("email", user.getAttribute("email"));
         }
 
-        return "home";
 
+        return "home";
 
     }
 }

@@ -7,7 +7,8 @@ phases:
   build:
     commands:
       - echo Build completed on `date`
-      - mvn package -Dmaven.test.skip
+      - mvn test -Dspring.profiles.active=test
+      - mvn package -Dmaven.test.skip=true
   post_build:
     commands:
       - echo Build completed on `data`

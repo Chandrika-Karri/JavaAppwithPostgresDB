@@ -11,9 +11,9 @@ public class FizzBuzzServiceTest {
 
     @Test
     public void When_Number_Is_Not_3or5_Not_Divisible_By_3or5(){
-        int number = 8;
+        int number = 4;
         String result = sut.fizzBuzz(number);
-        assertEquals("8", result);
+        assertEquals("4", result);
     }
 
     @Test
