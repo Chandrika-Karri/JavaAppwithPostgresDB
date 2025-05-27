@@ -6,8 +6,9 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo "Running Maven build in the root directory"
-      - pwd
+      - echo "Current directory: $(pwd)"
+      - echo "CodeBuild source directory: $CODEBUILD_SRC_DIR"
+      - cd $CODEBUILD_SRC_DIR
       - ls -l
       - mvn clean package -Dspring.profiles.active=test
   post_build:
