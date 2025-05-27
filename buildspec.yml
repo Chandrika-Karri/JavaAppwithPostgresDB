@@ -6,7 +6,8 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo Build completed on `date`
+      - echo "Changing to root directory where pom.xml is"
+      - cd ..
       - mvn clean package -Dspring.profiles.active=test
   post_build:
     commands:
