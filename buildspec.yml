@@ -7,7 +7,8 @@ phases:
   build:
     commands:
  #     - echo Build completed on `date`
-      - echo "Starting build phase"
+      - echo "CodeBuild working directory: $CODEBUILD_SRC_DIR"
+      - cd $CODEBUILD_SRC_DIR/..
       - echo Current working directory `pwd`
       - ls -l
       - mvn test -Dspring.profiles.active=test
