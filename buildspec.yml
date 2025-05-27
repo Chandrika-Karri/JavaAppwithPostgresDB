@@ -7,7 +7,7 @@ phases:
   build:
     commands:
  #     - echo Build completed on `date`
-      - - echo "Starting build phase"
+      - echo "Starting build phase"
       - echo Current working directory `pwd`
       - ls -l
       - mvn test -Dspring.profiles.active=test
