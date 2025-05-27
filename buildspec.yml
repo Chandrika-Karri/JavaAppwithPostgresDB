@@ -6,12 +6,15 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo Build completed on `date`
+ #     - echo Build completed on `date`
+      - - echo "Starting build phase"
+      - echo Current working directory `pwd`
+      - ls -l
       - mvn test -Dspring.profiles.active=test
       - mvn package -Dmaven.test.skip=true
   post_build:
     commands:
-      - echo Build completed on `data`
+      - echo Build completed on `date`
 artifacts:
   files:
     - target/*.jar
