@@ -6,8 +6,8 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo "Changing to root directory where pom.xml is"
-      - cd ..
+      - echo "Running Maven build in the correct directory"
+      - cd source
       - mvn clean package -Dspring.profiles.active=test
   post_build:
     commands:
