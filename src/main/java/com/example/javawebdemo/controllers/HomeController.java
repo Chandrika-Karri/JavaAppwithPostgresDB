@@ -2,6 +2,8 @@ package com.example.javawebdemo.controllers;
 
 import com.example.javawebdemo.model.FizzBuzzResult;
 import com.example.javawebdemo.repository.FizzBuzzResultRepository;
+import com.example.javawebdemo.s3.BucketCreation;
+import com.example.javawebdemo.s3.Xmlfile;
 import com.example.javawebdemo.service.FizzBuzzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -20,6 +22,13 @@ public class HomeController extends BaseController {
     private FizzBuzzService fizzBuzzService;
 
     @Autowired
+    private BucketCreation bucketCreation;
+
+
+    @Autowired
+    private Xmlfile xmlfile;
+
+    @Autowired
     private FizzBuzzResultRepository fizzBuzzResultRepository;
 
     @GetMapping("/")
@@ -30,7 +39,12 @@ public class HomeController extends BaseController {
 
         if (isAuthenticated) {
             DefaultOAuth2User user = (DefaultOAuth2User) authentication.getPrincipal();
-            model.addAttribute("email", user.getAttribute("email"));
+            String email = user.getAttribute("email");
+            model.addAttribute("email", email);
+
+//            String xml = xmlfile.createLoginXml(email);
+//            System.out.println("xml: " + xml);
+            xmlfile.createLoginXml(email);
         }
 
         return "home";
