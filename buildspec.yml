@@ -4,20 +4,21 @@ phases:
   install:
     runtime-versions:
       java: corretto21
+
   build:
     commands:
- #     - echo Build completed on `date`
-      - echo "CodeBuild working directory: $CODEBUILD_SRC_DIR"
-      - cd $CODEBUILD_SRC_DIR/..
-      - echo Current working directory `pwd`
+      - echo "📁 CodeBuild source directory: $CODEBUILD_SRC_DIR"
+      - cd $CODEBUILD_SRC_DIR
+      - echo "📍 Now in: $(pwd)"
       - ls -l
       - mvn test -Dspring.profiles.active=test
       - mvn package -Dmaven.test.skip=true
+
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo "✅ Build completed on $(date)"
+
 artifacts:
   files:
     - target/*.jar
-    - buildspec.yml
   discard-paths: yes
