@@ -4,21 +4,16 @@ phases:
   install:
     runtime-versions:
       java: corretto21
-
   build:
     commands:
- #     - echo "Current directory $(pwd)"
-      - echo "CodeBuild source directory: $CODEBUILD_SRC_DIR"
-      - cd $CODEBUILD_SRC_DIR
-      - ls -l
-      - mvn clean package -Dspring.profiles.active=test
-
+      - echo Build completed on `date`
+      - mvn test -Dspring.profiles.active=test
+      - mvn package -Dmaven.test.skip=true
   post_build:
     commands:
-      - echo "Build completed on $(date)"
-
+      - echo Build completed on `data`
 artifacts:
   files:
     - target/*.jar
-    - buildspec.yml
+    - /buildspec.yml
   discard-paths: yes
