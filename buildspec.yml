@@ -13,7 +13,7 @@ phases:
       - mvn clean package -Dspring.profiles.active=test
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo "Build completed on $(date)"
 artifacts:
   files:
     - target/*.jar
