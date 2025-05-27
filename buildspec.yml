@@ -6,8 +6,9 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo "Running Maven build in the correct directory"
-      - cd source
+      - echo "Running Maven build in the root directory"
+      - pwd
+      - ls -l
       - mvn clean package -Dspring.profiles.active=test
   post_build:
     commands:
