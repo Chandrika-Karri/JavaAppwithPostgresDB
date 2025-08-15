@@ -9,7 +9,7 @@ public class BeerCalculatorService {
         if(promille > 1){
             return false;
         }
-        if(age >= 20 && location.equalsIgnoreCase("K")){
+        if(age >= 18 && location.equalsIgnoreCase("K")){
             return true;
         }
         if(age >= 20 && location.equalsIgnoreCase("S")){
