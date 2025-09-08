@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
+// A base controller to provide common functionalities
 public class BaseController {
     public String getLoggedInEmail() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
